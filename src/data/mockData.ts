@@ -9,6 +9,11 @@ import type {
   PredictionEvent,
   UserProfile,
 } from "../types";
+import novaAvatar from "../assets/avatars/nova.png";
+import dataAvatar from "../assets/avatars/data.png";
+import trendAvatar from "../assets/avatars/trend.png";
+import marketAvatar from "../assets/avatars/market.png";
+import visionAvatar from "../assets/avatars/vision.png";
 
 export const demoUser: UserProfile = {
   uid: "demo-mahmood",
@@ -110,7 +115,7 @@ export const mockUsers: UserProfile[] = [
     totalSpent: 5660,
     rank: 1,
     currentStreak: 24,
-    photoURL: "https://api.dicebear.com/8.x/personas/svg?seed=NovaMind",
+    photoURL: novaAvatar,
   },
   {
     ...demoUser,
@@ -124,7 +129,7 @@ export const mockUsers: UserProfile[] = [
     totalSpent: 3430,
     rank: 2,
     currentStreak: 17,
-    photoURL: "https://api.dicebear.com/8.x/personas/svg?seed=DataOracle",
+    photoURL: dataAvatar,
   },
   {
     ...demoUser,
@@ -138,7 +143,7 @@ export const mockUsers: UserProfile[] = [
     totalSpent: 2670,
     rank: 3,
     currentStreak: 12,
-    photoURL: "https://api.dicebear.com/8.x/personas/svg?seed=TrendSeeker",
+    photoURL: trendAvatar,
   },
   {
     ...demoUser,
@@ -152,7 +157,7 @@ export const mockUsers: UserProfile[] = [
     totalSpent: 2260,
     rank: 4,
     currentStreak: 9,
-    photoURL: "https://api.dicebear.com/8.x/personas/svg?seed=MarketMuse",
+    photoURL: marketAvatar,
   },
   {
     ...demoUser,
@@ -166,7 +171,7 @@ export const mockUsers: UserProfile[] = [
     totalSpent: 1890,
     rank: 5,
     currentStreak: 8,
-    photoURL: "https://api.dicebear.com/8.x/personas/svg?seed=VisionaryX",
+    photoURL: visionAvatar,
   },
   demoUser,
 ];
