@@ -109,9 +109,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="glass-card p-5">
-          <SectionHeader title="Top Predictors" />
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="glass-card rounded-[18px] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
+          <div className="mb-4 flex items-center gap-2">
+            <Crown className="h-5 w-5 fill-gold/30 text-gold" />
+            <h2 className="text-lg font-black text-white">Top Predictors</h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
             {mockUsers.slice(0, 5).map((predictor) => (
               <PredictorCard key={predictor.uid} user={predictor} />
             ))}
@@ -119,9 +122,12 @@ export default function Home() {
         </div>
 
         <div className="space-y-4">
-          <div className="glass-card p-5">
-            <SectionHeader title="Categories" action={<Link className="text-sm font-bold text-gold" to="/predictions">View all</Link>} />
-            <div className="space-y-2">
+          <div className="glass-card rounded-[18px] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-black text-white">Categories</h2>
+              <Link className="text-xs font-bold text-gold" to="/predictions">View all</Link>
+            </div>
+            <div className="space-y-[9px]">
               {categories.slice(0, 6).map((category) => (
                 <CategoryCard key={category.id} category={category} />
               ))}
