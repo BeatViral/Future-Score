@@ -12,25 +12,34 @@ import { useAuth } from "../context/AuthContext";
 
 function CrystalBallVisual() {
   return (
-    <div className="glass-card relative min-h-[300px] overflow-hidden p-8">
-      <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(245,196,81,0.12),transparent_42%,rgba(56,189,248,0.12))]" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(to_top,rgba(245,196,81,0.16),transparent)]" />
-      <div className="relative z-10 grid gap-8 lg:grid-cols-[0.85fr_1fr]">
-        <div className="flex flex-col justify-center">
-          <h2 className="text-3xl font-light text-white">
-            Who is the next <span className="gold-text font-black">Nostradamus?</span>
+    <div className="glass-card relative min-h-[520px] overflow-hidden rounded-[1.4rem] border-white/10 bg-[#07111c] p-10 sm:p-12 lg:min-h-[560px] xl:min-h-[640px]">
+      <div className="absolute inset-0 bg-[linear-gradient(111deg,rgba(29,27,19,0.92)_0%,rgba(7,13,20,0.95)_36%,rgba(8,34,49,0.9)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_23%,rgba(245,196,81,0.18),transparent_22%),radial-gradient(circle_at_69%_22%,rgba(56,189,248,0.22),transparent_18%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(to_top,rgba(177,124,31,0.18),rgba(45,75,66,0.18)_42%,transparent)]" />
+      <div className="relative z-10 flex min-h-[440px] flex-col gap-8 lg:min-h-[520px]">
+        <div className="max-w-[360px] pt-12 sm:pt-16">
+          <h2 className="text-4xl font-light leading-[1.18] tracking-normal text-white sm:text-[42px]">
+            Who is the next
+            <span className="block bg-gradient-to-r from-[#fff4bc] via-[#f5c451] to-[#c98118] bg-clip-text font-black text-transparent">
+              Nostradamus?
+            </span>
           </h2>
-          <p className="mt-5 text-slate-300">Millions are predicting.</p>
-          <p className="text-slate-300">The future is yours.</p>
+          <p className="mt-8 text-xl font-medium text-slate-300">Millions are predicting.</p>
+          <p className="mt-1 text-xl font-medium text-slate-300">The future is yours.</p>
         </div>
-        <div className="relative mx-auto h-64 w-64">
-          <div className="absolute bottom-7 left-1/2 h-12 w-56 -translate-x-1/2 rounded-[50%] bg-gold/30 blur-2xl" />
-          <div className="crystal-shell absolute left-1/2 top-2 h-52 w-52 -translate-x-1/2 rounded-full border border-white/25 shadow-[0_0_80px_rgba(245,196,81,0.28)]" />
-          <div className="absolute bottom-8 left-1/2 h-8 w-48 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#5b3510] via-gold to-[#5b3510]" />
-          <div className="absolute bottom-2 left-1/2 h-12 w-36 -translate-x-1/2 rounded-b-3xl rounded-t-xl border border-gold/40 bg-[#4a2b0e]" />
-          <div className="absolute left-1/2 top-16 h-36 w-px -translate-x-1/2 bg-gold/50" />
-          <div className="absolute left-20 top-24 h-px w-32 bg-gold/40" />
-          <div className="absolute right-20 top-36 h-px w-24 rotate-45 bg-gold/40" />
+
+        <div className="pointer-events-none absolute right-[8%] top-12 h-[290px] w-[320px] max-w-[48vw] sm:right-[11%] sm:top-14 sm:h-[330px] sm:w-[360px]">
+          <div className="absolute left-1/2 top-[20px] h-[250px] w-[250px] -translate-x-1/2 rounded-full border border-white/20 bg-[radial-gradient(circle_at_42%_34%,rgba(95,204,255,0.58)_0%,rgba(22,93,123,0.34)_18%,rgba(4,13,22,0.88)_46%,rgba(13,20,31,0.98)_100%)] shadow-[inset_0_0_22px_rgba(255,255,255,0.18),inset_0_0_52px_rgba(5,12,22,0.96),0_0_60px_rgba(245,196,81,0.18)] sm:h-[286px] sm:w-[286px]">
+            <div className="absolute inset-4 rounded-full border border-white/10" />
+            <div className="absolute left-[42%] top-[29%] h-16 w-16 rounded-full bg-white/45 blur-md" />
+            <div className="absolute right-[17%] top-[43%] h-24 w-24 rounded-full bg-gold/45 blur-2xl" />
+            <div className="absolute left-[45%] top-[44%] h-px w-[44%] bg-gold/45" />
+            <div className="absolute left-[50%] top-[30%] h-[63%] w-px bg-gold/55" />
+            <div className="absolute left-[35%] top-[49%] h-px w-[42%] -rotate-45 bg-gold/35" />
+            <div className="absolute left-[50%] top-[44%] h-28 w-px rotate-45 bg-gold/35" />
+          </div>
+          <div className="absolute bottom-[24px] left-1/2 h-10 w-[240px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8a4f12] via-[#c58926] to-[#8a4f12] shadow-[0_0_34px_rgba(245,196,81,0.28)]" />
+          <div className="absolute bottom-0 left-1/2 h-[70px] w-[178px] -translate-x-1/2 rounded-b-[2rem] rounded-t-2xl border border-gold/35 bg-[#5b310e]" />
         </div>
       </div>
     </div>
