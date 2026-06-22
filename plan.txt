@@ -1,0 +1,1423 @@
+You are building a full production-quality web app called FutureScore.
+
+Product name:
+FutureScore
+
+Tagline:
+Predict. Prove. Earn.
+
+Core concept:
+FutureScore is a prediction reputation platform where users make predictions, lock them, prove they were right, earn Future Credits, build a public FutureScore reputation, climb rankings, and spend credits in a creator marketplace.
+
+The app must look and feel exactly like a premium futuristic dark-mode SaaS dashboard:
+- dark navy / black background
+- elegant gold accent color
+- glossy rounded cards
+- subtle glow effects
+- crystal-ball / future / prediction visual language
+- premium startup aesthetic
+- high-end fintech / fantasy sports / creator marketplace feel
+- beautiful responsive UI
+- polished typography
+- smooth animations
+- dashboard-first layout
+
+IMPORTANT:
+Do not make this look like a basic template.
+Do not make it look like plain Firebase demo app.
+Do not use a boring white layout.
+The design must feel like a jaw-dropping premium product.
+
+TECH STACK:
+Use:
+- React + Vite or Next.js
+- Firebase Authentication
+- Firebase Firestore
+- Firebase Hosting compatible structure
+- OpenAI API integration placeholder
+- Stripe placeholder for future payments
+- Tailwind CSS
+- Framer Motion for subtle animations
+- Lucide React icons
+- Recharts for small charts
+- Fully componentized code
+
+For now, use Firebase for:
+- user login/signup
+- user profile
+- predictions
+- credits
+- leaderboard
+- marketplace items
+
+OpenAI should be integrated as a service layer placeholder for:
+- prediction cleaning
+- prediction validation
+- difficulty scoring
+- outcome resolution
+But if API keys are missing, the app should fall back to mock/demo mode.
+
+FIREBASE STRUCTURE:
+Create collections:
+
+users
+- uid
+- displayName
+- email
+- photoURL
+- futureScore
+- accuracy
+- credits
+- totalEarned
+- totalSpent
+- level
+- xp
+- rank
+- bestStreak
+- createdAt
+
+predictions
+- id
+- userId
+- userName
+- userAvatar
+- rawText
+- cleanedText
+- category
+- confidence
+- deadline
+- status: active | resolved | failed
+- predictedOutcome
+- resolvedOutcome
+- difficulty
+- rewardCredits
+- createdAt
+- resolvedAt
+
+creditTransactions
+- id
+- userId
+- type: earned | spent | bonus
+- amount
+- reason
+- predictionId
+- createdAt
+
+marketplaceItems
+- id
+- title
+- creator
+- description
+- category
+- priceCredits
+- image
+- type: plugin | report | badge | pass | template
+- active
+
+categories
+- id
+- name
+- icon
+- predictionCount
+
+APP PAGES:
+
+1. Public Homepage / Main Page
+Route: /
+
+This should match the premium dark/gold dashboard concept.
+
+Top nav:
+- FutureScore logo on left
+- Home
+- Predictions
+- Rankings
+- Marketplace
+- Quests
+- Learn
+- Search bar: “Search predictions, people…”
+- Bell icon
+- Credits badge showing golden bag icon and “10 Credits”
+- User avatar / Sign in button depending on auth state
+
+Hero section:
+Left:
+- Big title: FutureScore
+- Big tagline: Predict. Prove. Earn.
+- Subheading:
+  “Predict what’s next, prove you were right, earn Future Credits, and build a reputation that sets you apart.”
+- CTA button:
+  “Sign up to become a master predictor”
+- Small metrics:
+  “250K+ Predictors”
+  “1.2M+ Predictions”
+  “$3.4M+ Credits Earned”
+
+Right:
+- Big card with crystal-ball / globe style visual
+- Text:
+  “Who is the next Nostradamus?”
+  “Millions are predicting.”
+  “The future is yours.”
+
+Below hero:
+Trending Predictions card:
+Show 4 prediction rows:
+- AI: “Will OpenAI release GPT-5 before July 2025?” 82% Yes
+- Markets: “Will the S&P 500 hit 6,000 before Aug 2025?” 67% Yes
+- Crypto: “Will Bitcoin reach $100K before Q3 2025?” 71% Yes
+- Sports: “Will Real Madrid win the Champions League 24/25?” 58% Yes
+
+Top Predictors section:
+Horizontal user cards with:
+- avatar
+- rank badge
+- username
+- FutureScore
+- accuracy
+- credits
+- streak
+
+Example users:
+NovaMind — FutureScore 1,942 — 78% accuracy — 12,540 credits — 24 day streak
+DataOracle — FutureScore 1,887 — 76% accuracy — 9,870 credits — 17 day streak
+TrendSeeker — FutureScore 1,754 — 74% accuracy — 7,230 credits — 12 day streak
+MarketMuse — FutureScore 1,621 — 72% accuracy — 6,140 credits — 9 day streak
+VisionaryX — FutureScore 1,483 — 70% accuracy — 5,310 credits — 8 day streak
+
+Categories card:
+- AI
+- Tech
+- Markets
+- Crypto
+- Sports
+- Music
+
+Creator Marketplace Preview:
+Show digital products purchasable with Future Credits:
+- The Macro Edge — 250 credits
+- AI Horizons — 200 credits
+- Market Compass — 300 credits
+- Crypto Signals — 250 credits
+- PHATSO Leveller Plugin — 700 credits
+- VIP Predictor Badge — 50 credits
+
+Right-side user progress mini card:
+- Rising Predictor
+- Level 28
+- XP progress bar
+- 82% accuracy
+- 14 day streak
+- 10 credits
+
+2. Auth Page
+Route: /auth
+
+Use Firebase Auth.
+Support:
+- Google login
+- email/password login
+- signup
+- logout
+
+The auth screen must match the dark/gold premium FutureScore design.
+
+Text:
+“Start building your prediction reputation.”
+“Sign up to become a master predictor.”
+
+After signup, create a user document in Firestore with:
+- futureScore: 0
+- accuracy: 0
+- credits: 10
+- totalEarned: 10
+- totalSpent: 0
+- level: 1
+- xp: 0
+- rank: null
+- bestStreak: 0
+
+Every new user gets 10 starter Future Credits.
+
+3. User Dashboard
+Route: /dashboard
+
+This should match the second generated dashboard concept.
+
+Header:
+Same as homepage.
+
+Welcome panel:
+“Welcome back, [displayName]”
+“Predict. Prove. Earn.”
+“Your insights shape tomorrow. Keep predicting and climb the ranks.”
+
+FutureScore Summary:
+Cards:
+- FutureScore
+- Accuracy
+- Total Predictions
+- Active Predictions
+- Resolved Predictions
+- Global Rank
+- Best Streak
+
+Example values for demo:
+FutureScore: 1,942
+Accuracy: 82%
+Total Predictions: 256
+Active Predictions: 18
+Resolved Predictions: 238
+Global Rank: #4,231
+Best Streak: 24 days
+
+Future Credits Hero Widget:
+A large beautiful gold money bag visual/card.
+Must clearly say:
+“Future Credits”
+“10 Credits”
+“Keep predicting to earn more credits!”
+Button:
+“Earn More Credits”
+
+My Wallet:
+- Credits in Bag: 10
+- Total Earned: 34
+- Total Spent: 24
+- Credit History
+
+Ways to Earn More:
+- Daily Login +1 credit
+- Share Prediction +2 credits
+- Invite Friends +5 credits
+
+My Predictions:
+Tabs:
+- All
+- Active
+- Resolved
+
+Show prediction cards/rows with:
+- category icon
+- status badge
+- prediction text
+- confidence
+- number of people predicting
+- deadline
+- if resolved: won/lost and credits earned
+
+Example:
+ACTIVE AI — “Will OpenAI release GPT-5 before July 2025?” — Predicted: Yes — 82% — Ends in 18d 04h
+ACTIVE Markets — “Will the S&P 500 hit 6,000 before Aug 2025?” — Predicted: Yes — 67% — Ends in 32d 10h
+RESOLVED Crypto — “Will Bitcoin reach $100K before Q3 2025?” — Won +10 credits
+RESOLVED Sports — “Will Real Madrid win the Champions League 24/25?” — Won +8 credits
+
+Create Prediction card:
+- large glowing plus icon
+- category dropdown
+- button “Create Prediction”
+
+Category Performance:
+Cards for:
+- AI 86%
+- Markets 79%
+- Crypto 74%
+- Sports 68%
+- Music 62%
+- Tech 81%
+Each card should have a small line chart.
+
+Master Predictor Progression:
+- Level 28
+- Title: Master Predictor
+- XP bar: 2,350 / 3,000 XP to next level
+- Current Tier: Gold III
+- Badges:
+  Streak Master
+  Accuracy Ace
+  Insight Seeker
+
+Marketplace Preview:
+Reward cards:
+- Premium Analytics — 15 credits
+- Ad-Free Experience — 20 credits
+- Early Access Pass — 35 credits
+- VIP Predictor Badge — 50 credits
+Button:
+“Explore more rewards in the Marketplace”
+
+Top Predictors mini list:
+- NovaMind
+- DataOracle
+- TrendSeeker
+- You
+
+4. Predictions Page
+Route: /predictions
+
+Main purpose:
+Users can browse, create, lock, and track predictions.
+
+Layout:
+- category filters
+- active/trending/resolved tabs
+- search
+- prediction cards
+
+Create Prediction Flow:
+When user clicks Create Prediction:
+Open modal with:
+
+Step 1:
+Choose category:
+AI, Tech, Markets, Crypto, Sports, Music, Entertainment, Startups, World Events
+
+Step 2:
+Enter raw prediction:
+Placeholder:
+“Example: AI-generated song will enter the Billboard Hot 100 before Dec 31, 2026.”
+
+Step 3:
+Set:
+- deadline
+- confidence percentage
+- predicted outcome: Yes / No
+
+Step 4:
+OpenAI validation placeholder:
+Show:
+“FutureScore is cleaning your prediction into a measurable contract…”
+
+Then return mock cleaned prediction:
+- Cleaned statement
+- Resolution criteria
+- Category
+- Difficulty
+- Potential reward credits
+
+Step 5:
+Lock prediction button:
+“Lock Prediction”
+
+When locked:
+Save to Firestore.
+Deduct 1 credit if desired, or allow free lock.
+Show confirmation:
+“Prediction locked. Your future call is now timestamped.”
+
+Important:
+Predictions must not be vague.
+If OpenAI/mock validation says vague, prompt user to make it measurable.
+
+5. Rankings Page
+Route: /rankings
+
+Show:
+- global leaderboard
+- category leaderboards
+- weekly climbers
+- top streaks
+- top accuracy
+- most credits earned
+
+Use user cards.
+Make it feel like a competitive game.
+
+6. Marketplace Page
+Route: /marketplace
+
+Purpose:
+Users spend Future Credits on creator products.
+
+Sections:
+- Featured rewards
+- Creator tools
+- Music plugins
+- Prediction reports
+- Badges
+- Access passes
+
+Include PHATSO product:
+Title:
+“PHATSO Leveller Plugin”
+Description:
+“Music production plugin for creators who want faster, polished vocal and mix results.”
+Price:
+700 Future Credits
+Button:
+“Redeem with Credits”
+
+Other products:
+- AI Horizons Report — 200 credits
+- Market Compass — 300 credits
+- Crypto Signals — 250 credits
+- VIP Predictor Badge — 50 credits
+- Premium Analytics Pass — 15 credits
+- Creator Drop Access — 35 credits
+
+When user clicks redeem:
+If enough credits:
+- deduct credits
+- add transaction
+- show success modal
+If not enough credits:
+- show “Keep predicting to earn more Future Credits.”
+
+7. Learn Page
+Route: /learn
+
+Educational content:
+- How FutureScore works
+- What are Future Credits?
+- How predictions are scored
+- What makes a good prediction?
+- How to earn credits
+- FutureCoin note
+
+Important wording:
+Future Credits are platform rewards.
+They are not cash.
+They are not guaranteed to have monetary value.
+If FutureScore launches a token in the future, eligible credits may become convertible 1:1 into FutureCoin.
+Do not promise investment returns.
+
+8. Admin Page
+Route: /admin
+
+Protected simple admin route.
+For now use a hardcoded admin email in config.
+
+Admin can:
+- view all predictions
+- mark prediction as resolved true/false
+- award credits
+- create marketplace items
+- view users
+- adjust credits manually
+- view transactions
+
+When resolving a prediction:
+If user was correct:
+- update prediction status to resolved
+- add credits
+- add credit transaction
+- update user totalEarned
+- update user credits
+- update FutureScore
+- update XP
+
+If incorrect:
+- mark failed/resolved
+- no credits awarded
+- update stats
+
+SCORING SYSTEM:
+Create utility functions.
+
+FutureScore calculation:
+Base score should consider:
+- accuracy
+- resolved predictions
+- difficulty
+- streak
+- credits earned
+
+Simple formula for v1:
+futureScore = 
+(resolvedCorrect * 10) +
+(totalCreditsEarned * 0.5) +
+(bestStreak * 5) +
+(difficultyBonus)
+
+Credit reward formula:
+Easy: 5 credits
+Medium: 15 credits
+Hard: 50 credits
+Very Hard: 100 credits
+
+Add confidence multiplier:
+If confidence between 50-70: normal
+If confidence 71-85: +10%
+If confidence 86-100: +20%, but only if correct
+
+Add early prediction bonus if deadline is far away.
+
+VISUAL DESIGN REQUIREMENTS:
+Use CSS/Tailwind design tokens:
+
+Colors:
+--background: #05070d
+--surface: #0b1018
+--surface2: #111827
+--border: rgba(255,255,255,0.08)
+--gold: #f5c451
+--gold2: #d99f2b
+--text: #f8fafc
+--muted: #94a3b8
+--green: #22c55e
+--red: #ef4444
+--blue: #38bdf8
+--purple: #a855f7
+
+Style:
+- dark gradient background
+- gold glow
+- glassmorphism cards
+- rounded-2xl
+- subtle borders
+- hover lift effects
+- animated card entrance
+- icons with gold glows
+- progress bars
+- micro-interactions
+
+Create reusable components:
+- AppShell
+- Navbar
+- StatCard
+- PredictionCard
+- PredictorCard
+- CategoryCard
+- CreditsBag
+- MarketplaceItemCard
+- ProgressCard
+- BadgeCard
+- CreatePredictionModal
+- LeaderboardTable
+- WalletPanel
+- AuthForm
+
+CreditsBag component:
+Must be visually memorable.
+Show a gold bag icon using CSS/SVG/Lucide or custom styled div.
+Must clearly show number:
+“10”
+“Credits”
+or “Credits in Bag: 10”
+Use gold gradient, glow, coin particles if possible.
+
+DATA:
+Include mock/demo seed data so the app looks populated even before Firebase has data.
+
+Mock users:
+NovaMind
+DataOracle
+TrendSeeker
+MarketMuse
+VisionaryX
+Mahmood
+
+Mock predictions:
+AI, Markets, Crypto, Sports, Music, Tech examples.
+
+Mock marketplace:
+Include PHATSO Leveller Plugin.
+
+AUTH BEHAVIOR:
+If user is logged out:
+- homepage shows sign up CTA
+- dashboard redirects to auth
+- credits badge can show demo 10 credits or prompt login
+
+If logged in:
+- dashboard shows real user data
+- predictions save under uid
+- credits update from Firestore
+
+OPENAI SERVICE:
+Create file:
+/src/services/openai.ts
+
+Functions:
+validatePrediction(rawText, category, deadline)
+scoreDifficulty(cleanedPrediction)
+resolvePrediction(prediction)
+
+For now:
+- if no API key, return mock validation.
+- structure code so real OpenAI API can be added later.
+
+FIREBASE SERVICE:
+Create:
+/src/lib/firebase.ts
+/src/services/users.ts
+/src/services/predictions.ts
+/src/services/credits.ts
+/src/services/marketplace.ts
+
+Use environment variables:
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+VITE_OPENAI_API_KEY
+
+SECURITY:
+Add Firestore security rules:
+- users can read public profiles
+- users can update only their own user doc
+- users can create predictions under their own uid
+- users can read public predictions
+- marketplace readable by all
+- creditTransactions readable only by owner
+- admin-only writes for resolution and marketplace admin actions
+
+DELIVERABLE:
+Build the full app with:
+- all pages
+- responsive layout
+- polished dark/gold UI
+- Firebase auth integration
+- Firestore data model
+- mock fallback data
+- create prediction modal
+- dashboard
+- marketplace
+- rankings
+- admin resolver
+- README with setup instructions
+- .env.example
+- Firebase rules file
+- deployment notes for Firebase Hosting
+
+BRAND COPY:
+Use these exact phrases throughout:
+“Predict. Prove. Earn.”
+“Sign up to become a master predictor”
+“Who is the next Nostradamus?”
+“Build your reputation by predicting what happens next.”
+“Earn Future Credits when your predictions come true.”
+“Credits in Bag”
+“Future Credits”
+“Master Predictor”
+“Prediction locked”
+“Your future call is now timestamped.”
+“Keep predicting to earn more credits.”
+
+IMPORTANT PRODUCT RULE:
+The prediction engine is the heart of the app.
+The user journey must always point back to:
+make prediction → lock prediction → prove outcome → earn credits → build FutureScore → spend credits.
+
+Now build the app.
+ ADDITIONAL PRODUCT REQUIREMENTS FOR FUTURESCORE
+
+Add the following expanded features to the existing FutureScore app specification.
+
+The app is now not only a prediction reputation platform. It is also a full coupon and rewards marketplace powered by prediction skill.
+
+Core expanded concept:
+
+FutureScore is a Forza-style gamified prediction platform where users make predictions, lock them, prove they were right, earn Future Credits, XP, badges, rank boosts, and marketplace rewards.
+
+Users can redeem Future Credits inside a full-blown coupon/rewards marketplace containing coupons, vendor offers, sponsor deals, digital products, creator drops, premium reports, access passes, and gift-card-style rewards.
+
+The product loop is:
+
+make prediction
+→ lock prediction
+→ outcome resolves
+→ earn credits + XP + badges + rank boost
+→ redeem credits for coupons and rewards
+→ enter bigger challenges
+→ climb toward Master Predictor / Nostradamus status
+
+This rewards marketplace must be treated as a core feature from v1, not a placeholder.
+
+--------------------------------------------------
+1. SIGNUP / TIER SYSTEM
+--------------------------------------------------
+
+Add a tier system for prediction locks.
+
+Plans:
+
+Explorer — Free
+- 5 active prediction locks
+- Basic FutureScore profile
+- Earn Future Credits
+- Basic leaderboard access
+- Browse marketplace
+- Unlock selected coupons
+
+Predictor — $9/month placeholder
+- 25 active prediction locks
+- Bonus monthly credits
+- Category leaderboards
+- Marketplace access
+- Weekly challenges
+- Profile badge
+
+Master Predictor — $29/month placeholder
+- 100 active prediction locks
+- Advanced analytics
+- Private leagues
+- Better visibility
+- Pro profile badge
+- Higher reward multiplier placeholder
+
+Oracle — $49/month placeholder
+- 250 active prediction locks
+- Creator marketplace access
+- Featured profile eligibility
+- Prediction rooms
+- Sponsor challenge access
+- Premium status badge
+
+Important:
+For v1, payments can be mocked or Stripe-ready. Do not require live Stripe keys. Build the tier structure in the UI and user data model.
+
+Add user fields:
+
+plan: explorer | predictor | master | oracle
+activePredictionLimit
+activePredictionCount
+monthlyBonusCredits
+planStartedAt
+planRenewsAt
+isCreatorSeller
+
+Prediction locks should be active slots, not total lifetime predictions.
+
+When a prediction resolves, that active slot becomes available again.
+
+--------------------------------------------------
+2. INSTANT GRATIFICATION WHEN PREDICTIONS COME TRUE
+--------------------------------------------------
+
+When a prediction resolves correctly, show a “Prediction Proven” reward moment.
+
+This should be a polished modal / animation screen.
+
+Modal title:
+“Prediction Proven”
+
+Copy:
+“You called it before the world caught up.”
+
+Show reward breakdown:
+
+- Future Credits earned
+- XP gained
+- FutureScore increase
+- Accuracy increase if applicable
+- Rank climb
+- Badge unlocked if applicable
+- Streak updated
+- Shareable proof card unlocked
+
+Example:
+
+Prediction Proven ✅
+
+You earned:
++50 Future Credits
++120 XP
+FutureScore: 742 → 791
+Global Rank: #4,921 → #4,612
+New Badge: Early Signal
+Streak: 4 wins
+Shareable Proof Card unlocked
+
+Button:
+“Share your proof”
+
+Button:
+“Redeem rewards”
+
+Button:
+“View prediction”
+
+Create a reusable component:
+PredictionRewardModal
+
+Create utility function:
+calculatePredictionRewards(prediction, user)
+
+Reward calculation should include:
+- base difficulty reward
+- confidence bonus
+- early prediction bonus
+- streak bonus
+- category bonus
+- tier multiplier placeholder
+
+Difficulty credit rewards:
+Easy: 5 credits
+Medium: 15 credits
+Hard: 50 credits
+Very Hard: 100 credits
+
+XP rewards:
+Easy: 25 XP
+Medium: 75 XP
+Hard: 150 XP
+Very Hard: 300 XP
+
+--------------------------------------------------
+3. GAMIFICATION SYSTEM LIKE FORZA HORIZON
+--------------------------------------------------
+
+FutureScore should feel like a game world for prediction skill.
+
+Add predictor levels:
+
+Level names:
+- Rookie Predictor
+- Rising Predictor
+- Sharp Signal
+- Trend Seeker
+- Master Predictor
+- Oracle
+- Nostradamus
+
+Add progression system:
+- XP
+- levels
+- tiers
+- badges
+- streaks
+- category trophies
+- seasonal challenges
+- prediction events
+
+Add dashboard section:
+“Master Predictor Progression”
+
+Show:
+- current level
+- XP bar
+- next level
+- current tier
+- badges earned
+- recent badge unlocks
+- next unlock
+
+Add badges:
+
+First Win
+3-Win Streak
+7-Win Streak
+Early Signal
+Against the Crowd
+High Confidence Hit
+Perfect Calibration
+AI Oracle
+Market Whisperer
+Music Tech Seer
+Sports Prophet
+Crypto Caller
+Nostradamus Rising
+
+Badges should have:
+id
+name
+description
+icon
+rarity: common | rare | epic | legendary
+unlockedAt
+category
+
+Add collection:
+userBadges
+
+--------------------------------------------------
+4. PREDICTION EVENTS / CHALLENGES
+--------------------------------------------------
+
+Add a section called:
+“Prediction Events”
+
+These are like Forza events, but for predictions.
+
+Examples:
+- AI Week Challenge
+- Crypto Q3 Challenge
+- Champions League Predictor Cup
+- Music Tech Oracle Event
+- Startup Demo Day Predictions
+- Market Moves Challenge
+
+Each event should include:
+- title
+- category
+- description
+- startDate
+- endDate
+- entryCostCredits
+- rewardPoolCredits
+- sponsorName optional
+- participantCount
+- status: upcoming | live | completed
+- featured
+
+Users can join events using credits or free entry depending on event.
+
+Add route:
+/events
+
+Add dashboard widget:
+“Live Challenges”
+
+--------------------------------------------------
+5. SHAREABLE PROOF CARDS
+--------------------------------------------------
+
+After a user wins a prediction, generate a shareable proof card.
+
+Card should show:
+
+FutureScore logo
+“I called it.”
+Prediction text
+Locked date
+Resolved date
+Outcome: Proven True
+Credits earned
+FutureScore
+User name
+Profile URL placeholder
+
+Example copy:
+
+I called it.
+
+Prediction:
+“Bitcoin will reach $100K before Q3 2025.”
+
+Locked:
+March 12, 2025
+
+Resolved:
+True
+
+Reward:
++100 Future Credits
+
+FutureScore:
+1,318
+
+Button:
+“Download Proof Card”
+Button:
+“Share”
+
+For v1, create visual proof card component.
+Download/share can be placeholder if necessary.
+
+Create component:
+ProofCard
+
+--------------------------------------------------
+6. FULL-BLOWN COUPON / REWARDS MARKETPLACE
+--------------------------------------------------
+
+The marketplace must be upgraded into a real coupon and rewards marketplace.
+
+Rename marketplace section to:
+
+FutureScore Rewards
+
+Main marketplace route:
+/marketplace
+
+Marketplace purpose:
+Users redeem Future Credits for coupons, sponsor offers, creator drops, digital products, reports, tools, badges, access passes, and gift-card-style rewards.
+
+Marketplace item types:
+
+coupon
+sponsor_offer
+creator_product
+digital_download
+gift_card_placeholder
+premium_access
+badge
+report
+plugin
+template
+
+Each coupon/reward item must support:
+
+id
+title
+vendor
+creator
+description
+category
+type
+discountText
+requiredCredits
+couponCode
+affiliateUrl
+imageUrl
+expiryDate
+terms
+source
+featured
+active
+createdAt
+
+source can be:
+manual
+rakuten
+couponapi
+linkmydeals
+fmtc
+sponsor
+creator
+
+Important marketplace behavior:
+
+Users can browse marketplace items freely.
+
+Coupon codes are hidden until the user unlocks them with Future Credits.
+
+When user unlocks a coupon:
+1. Check if the user has enough Future Credits.
+2. Deduct required credits.
+3. Create credit transaction.
+4. Reveal coupon code.
+5. Save unlocked coupon to user wallet.
+6. Show “Visit Vendor” button using affiliateUrl.
+7. Track coupon click.
+
+Add collections:
+
+couponOffers
+unlockedCoupons
+couponClicks
+sponsorCampaigns
+
+couponOffers:
+- id
+- title
+- vendor
+- description
+- category
+- type
+- source
+- discountText
+- requiredCredits
+- couponCode
+- affiliateUrl
+- imageUrl
+- expiryDate
+- terms
+- featured
+- active
+- createdAt
+
+unlockedCoupons:
+- id
+- userId
+- couponOfferId
+- couponCode
+- creditsSpent
+- unlockedAt
+- affiliateUrl
+- expiryDate
+
+couponClicks:
+- id
+- userId
+- couponOfferId
+- clickedAt
+- source
+
+sponsorCampaigns:
+- id
+- sponsorName
+- title
+- category
+- description
+- rewardPoolCredits
+- requiredAction
+- startDate
+- endDate
+- active
+
+Marketplace sections:
+
+Featured Coupons
+AI Tool Deals
+Music Plugin Deals
+Creator Tools
+Crypto / Finance Reports
+Sports Offers
+Tech Deals
+Sponsor Rewards
+Gift Card Style Rewards
+My Unlocked Coupons
+
+Seed the marketplace with realistic demo rewards:
+
+PHATSO Leveller Plugin
+- Type: plugin
+- Vendor: Beat Viral Music
+- Offer: 50% off
+- Required Credits: 100
+- Coupon Code: FUTURE50
+- Category: Music Plugins
+
+AI Horizons Report
+- Type: report
+- Offer: 30% off
+- Required Credits: 80
+- Category: AI Tools
+
+Market Compass Premium
+- Type: report
+- Offer: 25% off
+- Required Credits: 75
+- Category: Markets
+
+Crypto Signals Newsletter
+- Type: coupon
+- Offer: 40% off
+- Required Credits: 90
+- Category: Crypto
+
+Creator Template Pack
+- Type: template
+- Offer: Free unlock
+- Required Credits: 120
+- Category: Creator Tools
+
+VIP Predictor Badge
+- Type: badge
+- Required Credits: 50
+- Category: Profile Rewards
+
+Premium Analytics Pass
+- Type: premium_access
+- Required Credits: 15
+- Category: App Perks
+
+Ad-Free Experience
+- Type: premium_access
+- Required Credits: 20
+- Category: App Perks
+
+Early Access Pass
+- Type: premium_access
+- Required Credits: 35
+- Category: App Perks
+
+Music Producer Bundle
+- Type: creator_product
+- Offer: 60% off
+- Required Credits: 150
+- Category: Music Plugins
+
+Add service file:
+src/services/coupons.ts
+
+Functions:
+fetchCouponOffers()
+unlockCoupon(userId, couponOfferId)
+getUnlockedCoupons(userId)
+trackCouponClick(userId, couponOfferId)
+syncExternalCoupons()
+
+For v1, syncExternalCoupons() can return seeded/demo data.
+
+Build code so future coupon APIs can be plugged in:
+- Rakuten Coupon Feed API
+- CouponAPI.org
+- LinkMyDeals
+- FMTC Deal Feed API
+- Sponsor/vendor APIs
+
+Do not require real coupon API keys in v1.
+
+--------------------------------------------------
+7. USER WALLET / REWARDS WALLET
+--------------------------------------------------
+
+Add wallet route:
+/wallet
+
+Wallet should show:
+
+Future Credits balance
+Credits in Bag
+Total earned
+Total spent
+Credit transaction history
+Unlocked coupons
+Saved rewards
+Available coupons
+Expired coupons
+
+Wallet sections:
+- Credits Overview
+- Credit History
+- My Unlocked Coupons
+- Saved Rewards
+- Redeem More
+
+Credit transaction types:
+earned_prediction
+spent_coupon
+bonus_signup
+bonus_daily
+bonus_referral
+admin_adjustment
+event_reward
+
+--------------------------------------------------
+8. HOMEPAGE UPDATES
+--------------------------------------------------
+
+Update homepage copy to reflect the coupon marketplace.
+
+Use these lines:
+
+“Earn Future Credits when your predictions come true.”
+
+“Redeem credits for coupons, creator tools, sponsor rewards, and exclusive marketplace deals.”
+
+“Predict what happens next. Prove you were right. Unlock real rewards.”
+
+Add a marketplace strip on homepage:
+
+FutureScore Rewards
+“Use your Future Credits to unlock coupons, creator drops, software deals, sponsor rewards, and digital products.”
+
+Show reward cards:
+- PHATSO Leveller Plugin — 50% off — 100 credits
+- AI Tool Deal — 30% off — 80 credits
+- VIP Predictor Badge — 50 credits
+- Premium Analytics Pass — 15 credits
+
+--------------------------------------------------
+9. DASHBOARD UPDATES
+--------------------------------------------------
+
+Dashboard must include:
+
+Future Credits golden bag widget:
+- big gold bag visual
+- text: “Credits in Bag”
+- number: 10
+- button: “Redeem Rewards”
+
+Reward suggestions:
+“You can unlock these now”
+Show 3 reward cards based on user credit balance.
+
+Live Challenges:
+Show prediction events.
+
+Recent wins:
+Show reward moments and proof card links.
+
+My Unlocked Coupons:
+Small wallet preview.
+
+--------------------------------------------------
+10. ADMIN UPDATES
+--------------------------------------------------
+
+Admin page should allow:
+
+- Create coupon offer
+- Edit coupon offer
+- Deactivate coupon
+- View unlocked coupons
+- View coupon clicks
+- Create sponsor campaign
+- Resolve predictions
+- Award credits
+- Adjust user credits
+- Create prediction event
+- Feature marketplace offer
+
+Admin route:
+/admin
+
+Hardcode admin email for v1.
+
+--------------------------------------------------
+11. IMPORTANT COMPLIANCE COPY
+--------------------------------------------------
+
+Add this copy to Learn page and footer:
+
+“Future Credits are in-app reward points used inside the FutureScore platform. They are not cash, not gambling winnings, and not guaranteed to have monetary value.”
+
+“If FutureScore launches a token in the future, eligible credits may become convertible into FutureCoin, but no future value is promised.”
+
+“Users pay for access, prediction locks, analytics, events, and platform features. Rewards are based on prediction outcomes and platform rules.”
+
+Avoid language that promises investment returns.
+
+Do not say:
+“Credits will become valuable.”
+“Guaranteed coin conversion.”
+“Earn money.”
+“Cash out.”
+
+Use:
+“Earn Future Credits.”
+“Unlock rewards.”
+“Redeem in the marketplace.”
+“May become eligible for future token conversion.”
+
+--------------------------------------------------
+12. VISUAL DESIGN UPDATE
+--------------------------------------------------
+
+The app should feel like:
+
+Forza Horizon progression system
++
+premium fintech dashboard
++
+fantasy sports leaderboard
++
+creator marketplace
++
+coupon rewards app
+
+Keep dark/gold futuristic design.
+
+Reward moments should feel exciting.
+
+Coupon unlock should feel satisfying:
+- glow animation
+- coupon code reveal
+- credits bag decreasing
+- success modal
+
+Prediction win should feel like:
+- game achievement
+- rank-up
+- badge unlock
+- proof card reveal
+
+--------------------------------------------------
+13. FINAL PRODUCT POSITIONING
+--------------------------------------------------
+
+Use this product definition:
+
+FutureScore is a gamified prediction reputation platform where users lock predictions, prove they were right, earn Future Credits, climb rankings, unlock badges, and redeem credits for coupons, sponsor rewards, creator drops, and marketplace deals.
+
+The app is powered by three engines:
+
+1. Prediction Engine
+Users lock measurable predictions.
+
+2. Reputation Engine
+Users build FutureScore, XP, levels, badges, streaks, ranks.
+
+3. Rewards Marketplace
+Users redeem Future Credits for coupons, tools, sponsor rewards, creator products, and digital perks.
+
+Everything in the app should support this loop:
+
+Predict. Prove. Earn. Redeem. Rise.
