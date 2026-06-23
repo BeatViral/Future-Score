@@ -17,11 +17,11 @@ export default function CategoryCard({ category }: { category: CategoryStat }) {
   }[category.name];
 
   return (
-    <div className="group flex h-8 items-center gap-2 rounded-[9px] border border-white/[0.045] bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] px-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] transition hover:border-gold/25 hover:bg-gold/[0.055]">
-      <div className={cn("grid h-6 w-6 place-items-center rounded-md", colorClass)}>
-        <Icon className="h-4 w-4" />
+    <div className="group flex h-8 items-center gap-2 rounded-[9px] border border-white/[0.055] bg-[linear-gradient(180deg,rgba(255,255,255,0.068),rgba(255,255,255,0.025))] px-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_8px_18px_rgba(0,0,0,0.12)] transition hover:border-gold/25 hover:bg-gold/[0.055]">
+      <div className={cn("grid h-6 w-6 place-items-center rounded-md ring-1 ring-white/10", colorClass)}>
+        <Icon className="h-[15px] w-[15px]" />
       </div>
-      <div className="min-w-0 flex-1 text-sm font-black text-white">{category.name}</div>
+      <div className="min-w-0 flex-1 text-[13px] font-black text-white">{category.name}</div>
       <div className="whitespace-nowrap text-[11px] font-medium text-slate-400">
         {formatNumber(category.predictionCount)} Predictions
       </div>

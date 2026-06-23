@@ -55,25 +55,51 @@ const marketplacePreview = [
   },
 ];
 
+const trendTone: Record<string, { icon: string; glow: string }> = {
+  AI: {
+    icon: "bg-emerald-400/14 text-emerald-300 ring-emerald-300/20",
+    glow: "shadow-[0_0_18px_rgba(16,185,129,0.18)]",
+  },
+  Markets: {
+    icon: "bg-green-400/12 text-green-300 ring-green-300/20",
+    glow: "shadow-[0_0_18px_rgba(34,197,94,0.14)]",
+  },
+  Crypto: {
+    icon: "bg-orange-400/16 text-orange-300 ring-orange-300/24",
+    glow: "shadow-[0_0_20px_rgba(249,115,22,0.2)]",
+  },
+  Sports: {
+    icon: "bg-purple-400/14 text-purple-200 ring-purple-300/20",
+    glow: "shadow-[0_0_18px_rgba(168,85,247,0.18)]",
+  },
+  Music: {
+    icon: "bg-pink-400/14 text-pink-300 ring-pink-300/20",
+    glow: "shadow-[0_0_18px_rgba(236,72,153,0.16)]",
+  },
+};
+
 function HeroVisual() {
   return (
-    <div className="relative h-full min-h-[225px] overflow-hidden rounded-[22px] border border-white/10 bg-black/22 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+    <div className="relative h-full min-h-[238px] overflow-hidden rounded-[22px] border border-white/12 bg-[#050910] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_0_80px_rgba(245,196,81,0.06),0_18px_70px_rgba(0,0,0,0.34)]">
       <img
         src={heroGlobeBg}
         alt=""
-        className="absolute inset-y-0 right-0 h-full w-[72%] object-cover object-center opacity-90 [mask-image:linear-gradient(90deg,transparent_0%,black_18%,black_100%)]"
+        className="absolute inset-y-0 right-[-4%] h-full w-[84%] scale-[1.08] object-cover object-center opacity-95 saturate-[1.12] contrast-[1.08] [mask-image:linear-gradient(90deg,transparent_0%,black_16%,black_100%)]"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(5,7,13,0.78)_0%,rgba(6,12,21,0.65)_35%,rgba(8,18,27,0.2)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(245,196,81,0.18),transparent_32%),radial-gradient(circle_at_80%_15%,rgba(56,189,248,0.11),transparent_28%)]" />
-      <div className="absolute bottom-0 right-0 top-0 w-[72%] bg-[linear-gradient(90deg,transparent,rgba(5,7,13,0.16))]" />
-      <div className="relative z-10 flex h-full max-w-[330px] flex-col justify-center px-8 py-8">
-        <h2 className="text-[30px] font-light leading-tight text-white">
+      <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(5,7,13,0.88)_0%,rgba(6,12,21,0.62)_37%,rgba(8,18,27,0.06)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_54%,rgba(245,196,81,0.36),transparent_30%),radial-gradient(circle_at_72%_30%,rgba(56,189,248,0.2),transparent_24%),radial-gradient(circle_at_90%_18%,rgba(255,255,255,0.1),transparent_20%)]" />
+      <div className="absolute bottom-[-54px] right-[8%] h-36 w-[56%] rounded-full bg-gold/28 blur-3xl" />
+      <div className="absolute bottom-0 right-0 h-24 w-[78%] bg-[linear-gradient(0deg,rgba(217,159,43,0.22),transparent)]" />
+      <div className="absolute inset-y-0 right-0 w-[70%] bg-[linear-gradient(90deg,transparent,rgba(5,7,13,0.05)_40%,rgba(5,7,13,0.28))]" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent" />
+      <div className="relative z-10 flex h-full max-w-[350px] flex-col justify-center px-8 py-7">
+        <h2 className="text-[31px] font-light leading-tight text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.12)]">
           Who is the next
-          <span className="block bg-gradient-to-r from-[#fff2b3] via-gold to-[#c68118] bg-clip-text font-black text-transparent">
+          <span className="block bg-gradient-to-r from-[#fff4bc] via-gold to-[#c68118] bg-clip-text font-black text-transparent drop-shadow-[0_0_24px_rgba(245,196,81,0.26)]">
             Nostradamus?
           </span>
         </h2>
-        <p className="mt-6 text-sm font-medium text-slate-300">Millions are predicting.</p>
+        <p className="mt-6 text-sm font-semibold text-slate-200">Millions are predicting.</p>
         <p className="mt-1 text-sm font-medium text-slate-300">The future is yours.</p>
       </div>
       <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3">
@@ -87,7 +113,7 @@ function HeroVisual() {
 
 function PublicHero() {
   return (
-    <section className="glass-card relative -mt-4 min-h-[320px] overflow-hidden rounded-[22px] p-4 lg:px-14">
+    <section className="glass-card relative -mt-4 min-h-[320px] overflow-hidden rounded-[22px] p-3.5 lg:px-14">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_60%,rgba(245,196,81,0.12),transparent_24%),radial-gradient(circle_at_78%_35%,rgba(56,189,248,0.08),transparent_28%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,13,0.98),rgba(5,7,13,0.72)_44%,rgba(5,7,13,0.92))]" />
       <div className="absolute left-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/25 text-white/80 lg:grid">
@@ -97,7 +123,7 @@ function PublicHero() {
         <ChevronRight className="h-5 w-5" />
       </div>
 
-      <div className="relative z-10 grid min-h-[252px] items-center gap-7 xl:grid-cols-[0.43fr_0.57fr]">
+      <div className="relative z-10 grid min-h-[258px] items-center gap-6 xl:grid-cols-[0.41fr_0.59fr]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,14 +137,14 @@ function PublicHero() {
               Predict. Prove. Earn.
             </span>
           </h1>
-          <p className="mt-3 max-w-[380px] text-[15px] leading-relaxed text-slate-300">
+          <p className="mt-2.5 max-w-[380px] text-[15px] leading-relaxed text-slate-300">
             Predict what's next, prove you were right, earn Future Credits, and build a reputation that sets you apart.
           </p>
-          <Link to="/auth" className="gold-button mt-4 min-h-[46px] w-full max-w-[380px] justify-between px-8 text-[15px]">
+          <Link to="/auth" className="gold-button mt-3.5 min-h-[46px] w-full max-w-[380px] justify-between px-8 text-[15px] shadow-[0_0_34px_rgba(245,196,81,0.34)]">
             Sign up to become a master predictor
             <ArrowRight className="h-5 w-5" />
           </Link>
-          <div className="mt-4 grid max-w-[410px] grid-cols-3 divide-x divide-white/10">
+          <div className="mt-3.5 grid max-w-[410px] grid-cols-3 divide-x divide-white/10">
             {heroStats.map(({ value, label, icon: Icon }) => (
               <div key={label} className="flex items-center gap-3 px-4 first:pl-0 last:pr-0">
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/25 bg-gold/10 text-gold">
@@ -140,22 +166,26 @@ function PublicHero() {
 
 function TrendingPredictionRow({ prediction }: { prediction: Prediction }) {
   const Icon = categoryIcon(prediction.category);
+  const tone = trendTone[prediction.category] || {
+    icon: "bg-gold/12 text-gold ring-gold/20",
+    glow: "shadow-[0_0_18px_rgba(245,196,81,0.14)]",
+  };
 
   return (
-    <div className="group flex min-h-[54px] items-center gap-3 rounded-xl border border-white/[0.045] bg-[linear-gradient(180deg,rgba(255,255,255,0.052),rgba(255,255,255,0.018))] px-3 py-1.5 transition hover:border-gold/25 hover:bg-gold/[0.045]">
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-black/35 text-gold shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <div className="group flex min-h-[52px] items-center gap-2.5 rounded-xl border border-white/[0.045] bg-[linear-gradient(180deg,rgba(255,255,255,0.058),rgba(255,255,255,0.018))] px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] transition hover:border-gold/25 hover:bg-gold/[0.045]">
+      <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ring-1 ${tone.icon} ${tone.glow}`}>
         <Icon className="h-5 w-5" />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="text-[11px] font-black text-gold">{prediction.category}</div>
-        <div className="line-clamp-2 text-[11px] font-bold leading-tight text-white">
+        <div className="text-[10px] font-black leading-4 text-gold">{prediction.category}</div>
+        <div className="line-clamp-2 text-[11px] font-bold leading-[1.12] text-white">
           {prediction.rawText}
         </div>
       </div>
-      <div className="w-[68px] shrink-0 text-right">
-        <div className="text-sm font-black leading-none text-white">{prediction.confidence}%</div>
-        <div className="text-xs font-bold text-futureGreen">Yes</div>
-        <div className="mt-1 text-[10px] text-slate-500">{formatNumber(prediction.participantCount)} Predictors</div>
+      <div className="w-[66px] shrink-0 text-right">
+        <div className="text-[15px] font-black leading-none text-white">{prediction.confidence}%</div>
+        <div className="text-[10px] font-bold leading-4 text-futureGreen">Yes</div>
+        <div className="mt-0.5 whitespace-nowrap text-[9.5px] text-slate-500">{formatNumber(prediction.participantCount)} Predictors</div>
       </div>
     </div>
   );
@@ -163,11 +193,11 @@ function TrendingPredictionRow({ prediction }: { prediction: Prediction }) {
 
 function TrendingPredictions() {
   return (
-    <section className="glass-card rounded-[18px] p-3">
+    <section className="glass-card rounded-[18px] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_42px_rgba(0,0,0,0.26)]">
       <div className="mb-2 flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
           <Search className="h-4 w-4 text-white" />
-          <h2 className="text-lg font-black text-white">Trending Predictions</h2>
+          <h2 className="text-base font-black text-white">Trending Predictions</h2>
         </div>
         <Link className="text-xs font-bold text-gold" to="/predictions">
           View all
@@ -191,7 +221,7 @@ function TrendingPredictions() {
 
 function TopPredictors() {
   return (
-    <section className="glass-card rounded-[18px] px-4 pb-3 pt-4">
+    <section className="glass-card rounded-[18px] px-4 pb-3 pt-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_50px_rgba(0,0,0,0.3)]">
       <div className="mb-2 flex items-center gap-2">
         <Crown className="h-5 w-5 fill-gold/30 text-gold" />
         <h2 className="text-base font-black text-white">Top Predictors</h2>
@@ -207,7 +237,7 @@ function TopPredictors() {
 
 function CategoriesPanel() {
   return (
-    <section className="glass-card rounded-[18px] p-3">
+    <section className="glass-card rounded-[18px] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_42px_rgba(0,0,0,0.26)]">
       <div className="mb-2 flex items-center justify-between">
         <h2 className="text-base font-black text-white">Categories</h2>
         <Link className="text-xs font-bold text-gold" to="/predictions">
@@ -228,22 +258,22 @@ function ProgressPanel() {
   const user = profile || demoUser;
 
   return (
-    <section className="glass-card rounded-[18px] p-3">
+    <section className="glass-card rounded-[18px] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_42px_rgba(0,0,0,0.26)]">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="text-base font-black text-white">Your Progress</h2>
         <Link to="/dashboard" className="text-xs font-bold text-slate-400 hover:text-gold">
           View profile
         </Link>
       </div>
-      <div className="rounded-2xl border border-gold/25 bg-black/18 p-3">
+      <div className="rounded-2xl border border-gold/30 bg-[radial-gradient(circle_at_18%_20%,rgba(245,196,81,0.12),transparent_32%),rgba(0,0,0,0.18)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
         <div className="flex items-center gap-4">
-          <div className="grid h-[60px] w-[60px] place-items-center rounded-2xl border border-gold/60 bg-black/25 text-[24px] font-black text-gold shadow-[0_0_24px_rgba(245,196,81,0.14)]">
+          <div className="grid h-[60px] w-[60px] place-items-center border border-gold/70 bg-black/30 text-[24px] font-black text-gold shadow-[0_0_26px_rgba(245,196,81,0.2)] [clip-path:polygon(50%_0,92%_18%,92%_72%,50%_100%,8%_72%,8%_18%)]">
             {user.level}
           </div>
           <div className="min-w-0 flex-1">
             <div className="font-black text-white">Rising Predictor</div>
-            <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/8">
-              <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-gold to-gold2" />
+            <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/8 shadow-[inset_0_1px_2px_rgba(0,0,0,0.45)]">
+              <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-[#fff0ad] via-gold to-gold2 shadow-[0_0_14px_rgba(245,196,81,0.36)]" />
             </div>
             <div className="mt-2 text-[11px] text-slate-400">{user.xp.toLocaleString()} / 3,000 XP to next level</div>
           </div>
@@ -333,7 +363,7 @@ export default function Home() {
         <div className="grid items-start gap-3 2xl:grid-cols-[360px_minmax(0,1fr)]">
           <TrendingPredictions />
           <TopPredictors />
-          <MarketplacePreview className="2xl:col-span-2 2xl:-mt-[68px]" />
+          <MarketplacePreview className="2xl:col-span-2 2xl:-mt-[48px]" />
         </div>
         <div className="space-y-3">
           <CategoriesPanel />
