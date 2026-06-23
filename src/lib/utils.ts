@@ -21,7 +21,7 @@ export function cn(...classes: Array<string | false | null | undefined>) {
 
 export function formatNumber(value: number) {
   return new Intl.NumberFormat("en", {
-    notation: value >= 10000 ? "compact" : "standard",
+    notation: value >= 1000 ? "compact" : "standard",
     maximumFractionDigits: 1,
   }).format(value);
 }

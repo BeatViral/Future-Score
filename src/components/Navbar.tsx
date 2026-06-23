@@ -1,36 +1,32 @@
 import {
   Bell,
   BookOpen,
-  CalendarDays,
   ChevronDown,
   Home,
-  LayoutDashboard,
   LogIn,
   Search,
   Shield,
   ShoppingBag,
   Trophy,
-  Wallet,
 } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { adminEmail } from "../lib/firebase";
 import { cn } from "../lib/utils";
 
 const links = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/predictions", label: "Predictions", icon: Search },
   { to: "/rankings", label: "Rankings", icon: Trophy },
   { to: "/marketplace", label: "Marketplace", icon: ShoppingBag },
-  { to: "/events", label: "Events", icon: CalendarDays },
-  { to: "/wallet", label: "Wallet", icon: Wallet },
+  { to: "/events", label: "Quests", icon: Trophy },
   { to: "/learn", label: "Learn", icon: BookOpen },
 ];
 
 export default function Navbar() {
   const { profile, isAuthenticated } = useAuth();
-  const showAdmin = profile?.email === adminEmail;
+  const location = useLocation();
+  const showAdmin = profile?.email === adminEmail && location.pathname !== "/";
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-background/82 backdrop-blur-2xl">
@@ -42,21 +38,21 @@ export default function Navbar() {
           <span className="hidden text-xl font-black sm:block">FutureScore</span>
         </Link>
 
-        <nav className="hidden flex-1 items-center gap-1 overflow-x-auto lg:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-7 overflow-x-auto lg:flex">
           {links.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-300 transition",
+                  "relative flex min-h-11 items-center gap-2 px-1 text-sm font-semibold text-slate-300 transition",
                   isActive
-                    ? "bg-gold/10 text-gold shadow-[inset_0_-1px_0_rgba(245,196,81,0.45)]"
-                    : "hover:bg-white/5 hover:text-white",
+                    ? "text-white after:absolute after:bottom-[-13px] after:left-0 after:h-px after:w-full after:bg-gold after:shadow-[0_0_18px_rgba(245,196,81,0.8)]"
+                    : "hover:text-white",
                 )
               }
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-4 w-4 lg:hidden" />
               {label}
             </NavLink>
           ))}

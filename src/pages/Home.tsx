@@ -1,205 +1,344 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Crown, ShoppingBag, Sparkles, Trophy, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Crown, Flame, Search, ShoppingBag, Sparkles, Target, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import AppShell from "../components/AppShell";
 import CategoryCard from "../components/CategoryCard";
-import MarketplaceItemCard from "../components/MarketplaceItemCard";
-import PredictionCard from "../components/PredictionCard";
 import PredictorCard from "../components/PredictorCard";
-import SectionHeader from "../components/SectionHeader";
-import { categories, couponOffers, demoUser, mockPredictions, mockUsers } from "../data/mockData";
 import { useAuth } from "../context/AuthContext";
+import { categories, demoUser, mockPredictions, mockUsers } from "../data/mockData";
+import heroGlobeBg from "../assets/home/hero-globe-bg.png";
+import marketAi from "../assets/home/market-ai.png";
+import marketCompass from "../assets/home/market-compass.png";
+import marketCrypto from "../assets/home/market-crypto.png";
+import marketMacro from "../assets/home/market-macro.png";
+import { categoryIcon, formatNumber } from "../lib/utils";
+import type { Prediction } from "../types";
 
-function CrystalBallVisual() {
+const heroStats = [
+  { value: "250K+", label: "Predictors", icon: Users },
+  { value: "1.2M+", label: "Predictions", icon: Sparkles },
+  { value: "$3.4M+", label: "Credits Earned", icon: ShoppingBag },
+];
+
+const marketplacePreview = [
+  {
+    title: "The Macro Edge",
+    creator: "GlobalLens",
+    copy: "Monthly macro outlooks and high-confidence predictions.",
+    category: "Macro",
+    credits: 250,
+    image: marketMacro,
+  },
+  {
+    title: "AI Horizons",
+    creator: "ByteWiz",
+    copy: "Deep dives on AI trends and breakthroughs.",
+    category: "AI",
+    credits: 200,
+    image: marketAi,
+  },
+  {
+    title: "Market Compass",
+    creator: "ChartMaster",
+    copy: "Actionable market setups and risk insights.",
+    category: "Markets",
+    credits: 300,
+    image: marketCompass,
+  },
+  {
+    title: "Crypto Signals",
+    creator: "ChainOracle",
+    copy: "On-chain insights and high-probability calls.",
+    category: "Crypto",
+    credits: 250,
+    image: marketCrypto,
+  },
+];
+
+function HeroVisual() {
   return (
-    <div className="glass-card relative min-h-[600px] overflow-hidden rounded-[1.4rem] border-white/10 bg-[#07111c] p-10 sm:p-12 lg:min-h-[640px] xl:min-h-[720px]">
-      <div className="absolute inset-0 bg-[linear-gradient(111deg,rgba(29,27,19,0.92)_0%,rgba(7,13,20,0.95)_36%,rgba(8,34,49,0.9)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_23%,rgba(245,196,81,0.18),transparent_22%),radial-gradient(circle_at_69%_22%,rgba(56,189,248,0.22),transparent_18%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(to_top,rgba(177,124,31,0.18),rgba(45,75,66,0.18)_42%,transparent)]" />
-      <div className="relative z-10 flex min-h-[520px] flex-col gap-8 lg:min-h-[600px]">
-        <div className="max-w-[390px] pt-24 sm:pt-28 lg:pt-32">
-          <h2 className="text-[42px] font-light leading-[1.18] tracking-normal text-white sm:text-[52px]">
-            Who is the next
-            <span className="block bg-gradient-to-r from-[#fff4bc] via-[#f5c451] to-[#c98118] bg-clip-text font-black text-transparent">
-              Nostradamus?
-            </span>
-          </h2>
-          <p className="mt-10 text-2xl font-bold text-slate-300">Millions are predicting.</p>
-          <p className="mt-2 text-2xl font-bold text-slate-300">The future is yours.</p>
-        </div>
-
-        <div className="pointer-events-none absolute right-[6%] top-32 h-[390px] w-[410px] max-w-[52vw] sm:right-[9%] lg:top-36 xl:right-[12%]">
-          <div className="absolute left-1/2 top-0 h-[300px] w-[300px] -translate-x-1/2 rounded-full border border-white/20 bg-[radial-gradient(circle_at_42%_34%,rgba(95,204,255,0.58)_0%,rgba(22,93,123,0.34)_18%,rgba(4,13,22,0.88)_46%,rgba(13,20,31,0.98)_100%)] shadow-[inset_0_0_22px_rgba(255,255,255,0.18),inset_0_0_52px_rgba(5,12,22,0.96),0_0_80px_rgba(245,196,81,0.2)] sm:h-[340px] sm:w-[340px]">
-            <div className="absolute inset-4 rounded-full border border-white/10" />
-            <div className="absolute left-[42%] top-[29%] h-16 w-16 rounded-full bg-white/45 blur-md" />
-            <div className="absolute right-[17%] top-[43%] h-24 w-24 rounded-full bg-gold/45 blur-2xl" />
-            <div className="absolute left-[45%] top-[44%] h-px w-[44%] bg-gold/45" />
-            <div className="absolute left-[50%] top-[30%] h-[63%] w-px bg-gold/55" />
-            <div className="absolute left-[35%] top-[49%] h-px w-[42%] -rotate-45 bg-gold/35" />
-            <div className="absolute left-[50%] top-[44%] h-28 w-px rotate-45 bg-gold/35" />
-          </div>
-          <div className="absolute bottom-[28px] left-1/2 h-12 w-[300px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8a4f12] via-[#c58926] to-[#8a4f12] shadow-[0_0_34px_rgba(245,196,81,0.28)]" />
-          <div className="absolute bottom-0 left-1/2 h-[86px] w-[220px] -translate-x-1/2 rounded-b-[2rem] rounded-t-2xl border border-gold/35 bg-[#5b310e]" />
-        </div>
+    <div className="relative h-full min-h-[225px] overflow-hidden rounded-[22px] border border-white/10 bg-black/22 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+      <img
+        src={heroGlobeBg}
+        alt=""
+        className="absolute inset-y-0 right-0 h-full w-[72%] object-cover object-center opacity-90 [mask-image:linear-gradient(90deg,transparent_0%,black_18%,black_100%)]"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(5,7,13,0.78)_0%,rgba(6,12,21,0.65)_35%,rgba(8,18,27,0.2)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_42%,rgba(245,196,81,0.18),transparent_32%),radial-gradient(circle_at_80%_15%,rgba(56,189,248,0.11),transparent_28%)]" />
+      <div className="absolute bottom-0 right-0 top-0 w-[72%] bg-[linear-gradient(90deg,transparent,rgba(5,7,13,0.16))]" />
+      <div className="relative z-10 flex h-full max-w-[330px] flex-col justify-center px-8 py-8">
+        <h2 className="text-[30px] font-light leading-tight text-white">
+          Who is the next
+          <span className="block bg-gradient-to-r from-[#fff2b3] via-gold to-[#c68118] bg-clip-text font-black text-transparent">
+            Nostradamus?
+          </span>
+        </h2>
+        <p className="mt-6 text-sm font-medium text-slate-300">Millions are predicting.</p>
+        <p className="mt-1 text-sm font-medium text-slate-300">The future is yours.</p>
+      </div>
+      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3">
+        <span className="h-1.5 w-4 rounded-full bg-gold" />
+        <span className="h-1.5 w-4 rounded-full bg-white/35" />
+        <span className="h-1.5 w-4 rounded-full bg-white/25" />
       </div>
     </div>
   );
 }
 
-export default function Home() {
-  const { profile } = useAuth();
-  const user = profile || demoUser;
-  const featuredRewards = couponOffers.slice(0, 4);
-
+function PublicHero() {
   return (
-    <AppShell>
-      <section className="grid gap-4 xl:grid-cols-[0.88fr_1.12fr]">
+    <section className="glass-card relative -mt-4 min-h-[320px] overflow-hidden rounded-[22px] p-4 lg:px-14">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_60%,rgba(245,196,81,0.12),transparent_24%),radial-gradient(circle_at_78%_35%,rgba(56,189,248,0.08),transparent_28%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,13,0.98),rgba(5,7,13,0.72)_44%,rgba(5,7,13,0.92))]" />
+      <div className="absolute left-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/25 text-white/80 lg:grid">
+        <ChevronLeft className="h-5 w-5" />
+      </div>
+      <div className="absolute right-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/25 text-white/80 lg:grid">
+        <ChevronRight className="h-5 w-5" />
+      </div>
+
+      <div className="relative z-10 grid min-h-[252px] items-center gap-7 xl:grid-cols-[0.43fr_0.57fr]">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-card relative overflow-hidden p-8 sm:p-10"
+          className="mx-auto w-full max-w-[560px] xl:ml-20"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(245,196,81,0.18),transparent_36%)]" />
-          <div className="relative">
-            <p className="mb-3 text-sm font-black uppercase text-gold">Predict. Prove. Earn.</p>
-            <h1 className="text-5xl font-black leading-tight sm:text-6xl">
+          <h1 className="font-black leading-[1.02]">
+            <span className="block bg-gradient-to-r from-white via-slate-200 to-gold bg-clip-text text-[48px] text-transparent sm:text-[58px]">
               FutureScore
-              <span className="block gold-text">Predict. Prove. Earn.</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-lg text-slate-300">
-              Predict what happens next. Prove you were right. Unlock real rewards.
-            </p>
-            <p className="mt-3 max-w-xl text-sm text-muted">
-              Build your reputation by predicting what happens next. Earn Future Credits when your predictions come true.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link to="/auth" className="gold-button">
-                Sign up to become a master predictor
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link to="/predictions" className="ghost-button">
-                Browse predictions
-              </Link>
-            </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              {[
-                { value: "250K+", label: "Predictors", Icon: Users },
-                { value: "1.2M+", label: "Predictions", Icon: Sparkles },
-                { value: "$3.4M+", label: "Credits Earned", Icon: ShoppingBag },
-              ].map(({ value, label, Icon }) => (
-                <div key={label} className="rounded-2xl border border-border bg-black/20 p-4">
-                  <Icon className="mb-2 h-5 w-5 text-gold" />
-                  <div className="text-lg font-black text-white">{value}</div>
-                  <div className="text-xs text-muted">{label}</div>
+            </span>
+            <span className="block whitespace-nowrap bg-gradient-to-r from-[#fff0ad] via-gold to-[#d99f2b] bg-clip-text text-[38px] text-transparent sm:text-[46px]">
+              Predict. Prove. Earn.
+            </span>
+          </h1>
+          <p className="mt-3 max-w-[380px] text-[15px] leading-relaxed text-slate-300">
+            Predict what's next, prove you were right, earn Future Credits, and build a reputation that sets you apart.
+          </p>
+          <Link to="/auth" className="gold-button mt-4 min-h-[46px] w-full max-w-[380px] justify-between px-8 text-[15px]">
+            Sign up to become a master predictor
+            <ArrowRight className="h-5 w-5" />
+          </Link>
+          <div className="mt-4 grid max-w-[410px] grid-cols-3 divide-x divide-white/10">
+            {heroStats.map(({ value, label, icon: Icon }) => (
+              <div key={label} className="flex items-center gap-3 px-4 first:pl-0 last:pr-0">
+                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/25 bg-gold/10 text-gold">
+                  <Icon className="h-4 w-4" />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <div className="text-sm font-black text-white">{value}</div>
+                  <div className="text-xs text-slate-400">{label}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </motion.div>
-        <CrystalBallVisual />
-      </section>
+        <HeroVisual />
+      </div>
+    </section>
+  );
+}
 
-      <section className="mt-4 grid gap-4 xl:grid-cols-[0.92fr_1.48fr_0.8fr]">
-        <div className="glass-card p-5">
-          <SectionHeader title="Trending Predictions" action={<Link className="text-sm font-bold text-gold" to="/predictions">View all</Link>} />
-          <div className="space-y-3">
-            {mockPredictions.slice(0, 4).map((prediction) => (
-              <PredictionCard key={prediction.id} prediction={prediction} compact />
-            ))}
-          </div>
-        </div>
+function TrendingPredictionRow({ prediction }: { prediction: Prediction }) {
+  const Icon = categoryIcon(prediction.category);
 
-        <div className="glass-card rounded-[18px] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
-          <div className="mb-4 flex items-center gap-2">
-            <Crown className="h-5 w-5 fill-gold/30 text-gold" />
-            <h2 className="text-lg font-black text-white">Top Predictors</h2>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
-            {mockUsers.slice(0, 5).map((predictor) => (
-              <PredictorCard key={predictor.uid} user={predictor} />
-            ))}
-          </div>
+  return (
+    <div className="group flex min-h-[54px] items-center gap-3 rounded-xl border border-white/[0.045] bg-[linear-gradient(180deg,rgba(255,255,255,0.052),rgba(255,255,255,0.018))] px-3 py-1.5 transition hover:border-gold/25 hover:bg-gold/[0.045]">
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-black/35 text-gold shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="text-[11px] font-black text-gold">{prediction.category}</div>
+        <div className="line-clamp-2 text-[11px] font-bold leading-tight text-white">
+          {prediction.rawText}
         </div>
+      </div>
+      <div className="w-[68px] shrink-0 text-right">
+        <div className="text-sm font-black leading-none text-white">{prediction.confidence}%</div>
+        <div className="text-xs font-bold text-futureGreen">Yes</div>
+        <div className="mt-1 text-[10px] text-slate-500">{formatNumber(prediction.participantCount)} Predictors</div>
+      </div>
+    </div>
+  );
+}
 
-        <div className="space-y-4">
-          <div className="glass-card rounded-[18px] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-black text-white">Categories</h2>
-              <Link className="text-xs font-bold text-gold" to="/predictions">View all</Link>
-            </div>
-            <div className="space-y-[9px]">
-              {categories.slice(0, 6).map((category) => (
-                <CategoryCard key={category.id} category={category} />
-              ))}
-            </div>
-          </div>
-          <div className="glass-card p-5">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-black text-white">Your Progress</h3>
-              <Link to="/dashboard" className="text-xs font-bold text-gold">View profile</Link>
-            </div>
-            <div className="rounded-2xl border border-gold/30 bg-gold/10 p-4">
-              <div className="flex items-center gap-3">
-                <div className="grid h-16 w-16 place-items-center rounded-2xl border border-gold/40 bg-black/30 text-2xl font-black text-gold">
-                  {user.level}
-                </div>
-                <div className="flex-1">
-                  <div className="font-black text-white">Rising Predictor</div>
-                  <div className="mt-2 h-2 rounded-full bg-white/10">
-                    <div className="h-full w-[78%] rounded-full bg-gold" />
-                  </div>
-                  <div className="mt-1 text-xs text-muted">{user.xp.toLocaleString()} / 3,000 XP to next level</div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
-              <div className="rounded-xl border border-border bg-black/20 p-3">
-                <strong className="block text-lg text-white">{user.accuracy}%</strong>
-                Accuracy
-              </div>
-              <div className="rounded-xl border border-border bg-black/20 p-3">
-                <strong className="block text-lg text-white">{user.currentStreak}</strong>
-                Day Streak
-              </div>
-              <div className="rounded-xl border border-border bg-black/20 p-3">
-                <strong className="block text-lg text-white">{user.credits}</strong>
-                Credits
-              </div>
-            </div>
-          </div>
+function TrendingPredictions() {
+  return (
+    <section className="glass-card rounded-[18px] p-3">
+      <div className="mb-2 flex items-center justify-between px-1">
+        <div className="flex items-center gap-2">
+          <Search className="h-4 w-4 text-white" />
+          <h2 className="text-lg font-black text-white">Trending Predictions</h2>
         </div>
-      </section>
-
-      <section className="mt-4 glass-card p-5">
-        <SectionHeader
-          eyebrow="FutureScore Rewards"
-          title="Redeem credits for coupons, creator tools, sponsor rewards, and exclusive marketplace deals."
-          action={<Link to="/marketplace" className="text-sm font-bold text-gold">Visit Marketplace</Link>}
-        />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredRewards.map((item) => (
-            <MarketplaceItemCard key={item.id} item={item} compact />
-          ))}
-        </div>
-        <Link to="/marketplace" className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-border bg-black/20 py-3 text-sm font-bold text-gold">
-          Use your Future Credits to unlock coupons, creator drops, software deals, sponsor rewards, and digital products.
-          <ChevronRight className="h-4 w-4" />
+        <Link className="text-xs font-bold text-gold" to="/predictions">
+          View all
         </Link>
-      </section>
+      </div>
+      <div className="space-y-1">
+        {mockPredictions.slice(0, 4).map((prediction) => (
+          <TrendingPredictionRow key={prediction.id} prediction={prediction} />
+        ))}
+      </div>
+      <Link
+        to="/predictions"
+        className="mt-1.5 flex h-9 items-center justify-center gap-2 rounded-xl border border-white/[0.045] bg-white/[0.035] text-sm font-semibold text-slate-300 transition hover:border-gold/25 hover:text-gold"
+      >
+        Explore all predictions
+        <ChevronRight className="h-4 w-4" />
+      </Link>
+    </section>
+  );
+}
 
-      <section className="mt-4 grid gap-4 lg:grid-cols-4">
+function TopPredictors() {
+  return (
+    <section className="glass-card rounded-[18px] px-4 pb-3 pt-4">
+      <div className="mb-2 flex items-center gap-2">
+        <Crown className="h-5 w-5 fill-gold/30 text-gold" />
+        <h2 className="text-base font-black text-white">Top Predictors</h2>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+        {mockUsers.slice(0, 5).map((predictor) => (
+          <PredictorCard key={predictor.uid} user={predictor} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CategoriesPanel() {
+  return (
+    <section className="glass-card rounded-[18px] p-3">
+      <div className="mb-2 flex items-center justify-between">
+        <h2 className="text-base font-black text-white">Categories</h2>
+        <Link className="text-xs font-bold text-gold" to="/predictions">
+          View all
+        </Link>
+      </div>
+      <div className="space-y-[5px]">
+        {categories.slice(0, 6).map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ProgressPanel() {
+  const { profile } = useAuth();
+  const user = profile || demoUser;
+
+  return (
+    <section className="glass-card rounded-[18px] p-3">
+      <div className="mb-3 flex items-center justify-between">
+        <h2 className="text-base font-black text-white">Your Progress</h2>
+        <Link to="/dashboard" className="text-xs font-bold text-slate-400 hover:text-gold">
+          View profile
+        </Link>
+      </div>
+      <div className="rounded-2xl border border-gold/25 bg-black/18 p-3">
+        <div className="flex items-center gap-4">
+          <div className="grid h-[60px] w-[60px] place-items-center rounded-2xl border border-gold/60 bg-black/25 text-[24px] font-black text-gold shadow-[0_0_24px_rgba(245,196,81,0.14)]">
+            {user.level}
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="font-black text-white">Rising Predictor</div>
+            <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/8">
+              <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-gold to-gold2" />
+            </div>
+            <div className="mt-2 text-[11px] text-slate-400">{user.xp.toLocaleString()} / 3,000 XP to next level</div>
+          </div>
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-xl border border-white/[0.045] bg-black/18">
         {[
-          ["Prediction Engine", "Users lock measurable predictions."],
-          ["Reputation Engine", "Users build FutureScore, XP, levels, badges, streaks, ranks."],
-          ["Rewards Marketplace", "Users redeem Future Credits for coupons, tools, sponsor rewards, creator products, and digital perks."],
-          ["Predict. Prove. Earn. Redeem. Rise.", "The whole product loop points back to better calls and better rewards."],
-        ].map(([title, copy]) => (
-          <div key={title} className="glass-card p-5">
-            <Crown className="mb-4 h-6 w-6 text-gold" />
-            <h3 className="font-black text-white">{title}</h3>
-            <p className="mt-2 text-sm text-muted">{copy}</p>
+          { value: `${user.accuracy}%`, label: "Accuracy", icon: Target },
+          { value: user.currentStreak, label: "Day Streak", icon: Flame },
+          { value: user.credits, label: "Credits", icon: ShoppingBag },
+        ].map(({ value, label, icon: Icon }) => (
+          <div key={label} className="px-2 py-2.5 text-center">
+            <div className="flex items-center justify-center gap-1 text-base font-black text-white">
+              <Icon className="h-4 w-4 text-gold" />
+              {value}
+            </div>
+            <div className="text-[11px] text-slate-400">{label}</div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function HomeMarketCard({ item }: { item: (typeof marketplacePreview)[number] }) {
+  return (
+    <article className="flex h-[124px] min-w-0 overflow-hidden rounded-2xl border border-white/[0.055] bg-[linear-gradient(180deg,rgba(255,255,255,0.052),rgba(255,255,255,0.018))] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] transition hover:-translate-y-0.5 hover:border-gold/25">
+      <div className="relative w-[88px] shrink-0 overflow-hidden">
+        <img src={item.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+        <span className="absolute bottom-2 left-2 rounded-md bg-white px-2 py-1 text-[10px] font-black text-[#7c3a12]">
+          {item.category}
+        </span>
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col p-3">
+        <h3 className="line-clamp-1 text-sm font-black text-gold">{item.title}</h3>
+        <p className="text-xs text-slate-400">By {item.creator}</p>
+        <p className="mt-2 line-clamp-2 text-xs leading-snug text-slate-300">{item.copy}</p>
+        <div className="mt-auto flex items-center gap-2 text-sm font-black text-gold">
+          <ShoppingBag className="h-4 w-4" />
+          {item.credits}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MarketplacePreview({ className = "" }: { className?: string }) {
+  return (
+    <section className={`glass-card rounded-[18px] p-4 ${className}`}>
+      <div className="mb-3 flex items-center justify-between 2xl:pl-[372px]">
+        <div className="flex items-center gap-2">
+          <ShoppingBag className="h-5 w-5 text-slate-300" />
+          <h2 className="text-base font-black text-white">Creator Marketplace Preview</h2>
+        </div>
+        <Link to="/marketplace" className="text-xs font-bold text-gold">
+          Visit Marketplace
+        </Link>
+      </div>
+      <div className="grid gap-3 2xl:grid-cols-[repeat(4,minmax(0,1fr))_190px]">
+        {marketplacePreview.map((item) => (
+          <HomeMarketCard key={item.title} item={item} />
+        ))}
+        <Link
+          to="/marketplace"
+          className="flex h-[124px] items-center gap-4 rounded-2xl border border-white/[0.055] bg-white/[0.035] p-4 transition hover:border-gold/25 hover:bg-gold/[0.045]"
+        >
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-white/15 bg-black/20 text-slate-300">
+            <ShoppingBag className="h-6 w-6" />
+          </div>
+          <div className="min-w-0">
+            <div className="font-black text-white">Explore more</div>
+            <p className="mt-1 text-xs leading-snug text-slate-400">Top creators and exclusive insights.</p>
+          </div>
+          <ChevronRight className="ml-auto h-5 w-5 shrink-0 text-slate-500" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  return (
+    <AppShell>
+      <PublicHero />
+
+      <section className="mt-3 grid items-start gap-3 2xl:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="grid items-start gap-3 2xl:grid-cols-[360px_minmax(0,1fr)]">
+          <TrendingPredictions />
+          <TopPredictors />
+          <MarketplacePreview className="2xl:col-span-2 2xl:-mt-[68px]" />
+        </div>
+        <div className="space-y-3">
+          <CategoriesPanel />
+          <ProgressPanel />
+        </div>
       </section>
     </AppShell>
   );
